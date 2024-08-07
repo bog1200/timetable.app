@@ -1,10 +1,7 @@
 "use client";
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-
 import {SessionProvider} from "next-auth/react";
 
-const Providers = ({ children }: { children: React.ReactNode }) => {
+const LoginProvider = ({ children }: { children: React.ReactNode }) => {
     return (
         <SessionProvider>
             {children}
@@ -12,4 +9,4 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default Providers;
+export default LoginProvider;
