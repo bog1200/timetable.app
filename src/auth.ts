@@ -11,6 +11,15 @@ export const {
     session: {
         strategy: 'jwt',
     },
+    callbacks: {
+        session: async ({ session, token }) => {
+            if (session?.user) {
+                session.user.id = token.sub;
+            }
+            console.log(token);
+            return session;
+        },
+    },
     providers: [
         GitHubProvider({
             clientId: process.env.GITHUB_ID,
