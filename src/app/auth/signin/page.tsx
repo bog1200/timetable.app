@@ -1,22 +1,18 @@
-"use client"
-import {getProviders, signIn} from "next-auth/react"
+import { doSocialLogin } from "@/app/actions";
 
-
-// eslint-disable-next-line @next/next/no-async-client-component
-export default async function SignIn() {
-
-    const providers = await getProviders();
+const SocialLogins = () => {
     return (
-        <>
+        <form action={doSocialLogin}>
+            <button
+                className="bg-black text-white p-1 rounded-md m-1 text-lg"
+                type="submit"
+                name="action"
+                value="github"
+            >
+                Sign In With GitHub
+            </button>
+        </form>
+    );
+};
 
-            { providers !=null && Object.values(providers).map((provider) => (
-                <div key={provider.name}>
-                    <button onClick={() => signIn(provider.id)}>
-                        Sign in with {provider.name}
-                    </button>
-                </div>
-            ))}
-        </>
-    )
-}
-
+export default SocialLogins;
