@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Logout from "@/app/auth/signout/logout";
 import { DateTime } from "luxon";
 
 import { DayView } from "@/app/components/dayView";
@@ -22,20 +20,6 @@ export default async function HomePage({params, searchParams}: {
     const end = new Date(currentDay.year, currentDay.month - 1, currentDay.day, 23, 59, 59);
     return (
         <div className="flex flex-col items-center m-4 h-screen">
-            {session?.user?.name && session?.user?.image ? (
-                <>
-                    <h1 className="text-3xl my-2">Welcome, {session?.user?.name}</h1>
-                    <Image
-                        src={session?.user?.image}
-                        alt={session?.user?.name}
-                        width={72}
-                        height={72}
-                        className="rounded-full"
-                    />
-                </>
-            ) : (""
-                )}
-            <Logout/>
             <div className="w-full flex items-center justify-center space-x-4 my-4">
                 <a href={`?day=${currentDay.minus({week: 1}).toISODate()}`}
                    className="px-4 py-4 bg-blue-500 text-white rounded">

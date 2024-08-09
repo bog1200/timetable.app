@@ -17,7 +17,7 @@ export async function DayView(props: {user: string, start: Date, end: Date}) {
         <>
             {events.length === 0 && <h1 className={"p-4 text-lg"}>No events today</h1>}
             {events.length > 0 && <h1 className={"p-4 text-lg"}>Events today:</h1>}
-            <button className={"w-[80%] bg-green-500 text-white h-20 rounded-full my-5"}>Add Event</button>
+            <button className={"w-[80%] bg-green-500 text-white h-20 rounded-full my-5"}><a className={"w-full h-full"} href={"/dashboard/new"}>New Event</a></button>
             {events.map((event) => {
                 return (
                     <div key={event.id} className={"border border-gray-600 w-[80%] m-4 shadow-lg group rounded-lg"}>
