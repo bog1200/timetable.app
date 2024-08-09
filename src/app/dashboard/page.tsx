@@ -36,18 +36,30 @@ export default async function HomePage({params, searchParams}: {
             ) : (""
                 )}
             <Logout/>
-            <div className="flex space-x-4 my-4">
-                <a href={`/home?day=${currentDay.minus({days: 1}).toISODate()}`} className="px-4 py-4 bg-blue-500 text-white rounded">
+            <div className="w-full flex items-center justify-center space-x-4 my-4">
+                <a href={`?day=${currentDay.minus({week: 1}).toISODate()}`}
+                   className="px-4 py-4 bg-blue-500 text-white rounded">
+                    Prev Week
+                </a>
+                <a href={`?day=${currentDay.minus({days: 1}).toISODate()}`}
+                   className="px-4 py-4 bg-blue-500 text-white rounded">
                     Prev Day
                 </a>
-                <a href={`/home?day=${currentDay.plus({days: 1}).toISODate()}`} className="px-4 py-4 bg-blue-500 text-white rounded">
+                <h1 className={"text-3xl w-1/3 text-center"}>{start.getDate().toString().padStart(2, "0")}.{(start.getMonth() + 1).toString().padStart(2, "0")}.{start.getFullYear()}</h1>
+                <a href={`?day=${currentDay.plus({days: 1}).toISODate()}`}
+                   className="px-4 py-4 bg-blue-500 text-white rounded">
                     Next Day
                 </a>
+                <a href={`?day=${currentDay.plus({week: 1}).toISODate()}`}
+                   className="px-4 py-4 bg-blue-500 text-white rounded">
+                    Next Week
+                </a>
+
             </div>
             <div className={"w-full flex items-center flex-col"}>
-            <Suspense fallback={<p>Loading events...</p>}>
+                <Suspense fallback={<p>Loading events...</p>}>
 
-            <DayView user={session?.user?.email} start={start} end={end} />
+                    <DayView user={session?.user?.email} start={start} end={end} />
             </Suspense>
             </div>
         </div>
