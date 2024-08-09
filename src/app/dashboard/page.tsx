@@ -29,7 +29,7 @@ export default async function HomePage({params, searchParams}: {
                    className="px-4 py-4 bg-blue-500 text-white rounded">
                     Prev Day
                 </a>
-                <h1 className={"text-3xl w-1/3 text-center"}>{start.getDate().toString().padStart(2, "0")}.{(start.getMonth() + 1).toString().padStart(2, "0")}.{start.getFullYear()}</h1>
+                <h1 className={"text-3xl hidden md:block w-1/3 text-center"}>{start.getDate().toString().padStart(2, "0")}.{(start.getMonth() + 1).toString().padStart(2, "0")}.{start.getFullYear()}</h1>
                 <a href={`?day=${currentDay.plus({days: 1}).toISODate()}`}
                    className="px-4 py-4 bg-blue-500 text-white rounded">
                     Next Day
@@ -40,11 +40,12 @@ export default async function HomePage({params, searchParams}: {
                 </a>
 
             </div>
+            <h1 className={"text-3xl md:hidden w-full text-center"}>{start.getDate().toString().padStart(2, "0")}.{(start.getMonth() + 1).toString().padStart(2, "0")}.{start.getFullYear()}</h1>
             <div className={"w-full flex items-center flex-col"}>
                 <Suspense fallback={<p>Loading events...</p>}>
 
-                    <DayView user={session?.user?.email} start={start} end={end} />
-            </Suspense>
+                    <DayView user={session?.user?.email} start={start} end={end}/>
+                </Suspense>
             </div>
         </div>
     );
