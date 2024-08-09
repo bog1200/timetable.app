@@ -1,4 +1,3 @@
-
 import prisma  from "@/db";
 
 
@@ -21,14 +20,30 @@ export async function DayView(props: {user: string, start: Date, end: Date}) {
             {events.length === 0 && <h1>No events today</h1>}
             {events.map((event) => {
                 return (
-                    <div key={event.id} className={"border border-red-600 w-full p-4"}>
-                        <h1>ID: {event.id}</h1>
-                        <h1>UID: {event.uid}</h1>
-                        <h1>{event.startTime.getHours()}:{event.startTime.getMinutes()} - {event.endTime.getHours()}:{event.endTime.getMinutes()}</h1>
-                        <h1>{event.title}</h1>
-                        <h2>{event.description}</h2>
+                    <div key={event.id} className={"border border-gray-600 w-[80%] m-4 shadow-lg group"}>
+                        <h1 className={"bg-blue-500 text-white py-4 text-center text-xl border-b-4 border-blue-700"}>{event.title}</h1>
+                        <div className={"w-full h-0 group-hover:h-20 transition-all duration-300 md:delay-1000 flex overflow-hidden bg-sky-400 text-white text-center items-center text-xl"}>
+                            <p className={"w-1/2 text-center"}>Modify</p>
+                            <p className={"w-1/2"}>Delete</p>
+                        </div>
+                        <div className={"flex"}>
+                            <h2 className={"bg-red-400 text-white w-1/2 py-4 text-center text-xl border-r-4 border-blue-700"}><div>
+                                <h3 className={"text-sm"}>From:</h3>
+                                <p>{event.startTime.getHours()}:{event.startTime.getMinutes()}</p>
+                            </div>
+                            </h2>
+                            <h2 className={"bg-green-400 text-white w-1/2 py-4 text-center text-xl border-blue-700"}>
+                                <div>
+                                    <h3 className={"text-sm"}>To:</h3>
+                                    <p>{event.endTime.getHours()}:{event.endTime.getMinutes()}</p>
+                                </div>
+                               </h2>
+                        </div>
+                        <h2 className={"py-4 text-lg text-center border-t-2 border-gray-600 "}>{event.description}</h2>
+                        {/*<button className={"w-full bg-green-500 text-white h-10"}>DONE</button>*/}
                     </div>
-            )})}
+                )
+            })}
         </>
     )
 }
