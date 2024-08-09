@@ -23,8 +23,8 @@ export async function DayView(props: {user: string, start: Date, end: Date}) {
                     <div key={event.id} className={"border border-gray-600 w-[80%] m-4 shadow-lg group"}>
                         <h1 className={"bg-blue-500 text-white py-4 text-center text-xl border-b-4 border-blue-700"}>{event.title}</h1>
                         <div className={"w-full h-0 group-hover:h-20 transition-all duration-300 md:delay-1000 flex overflow-hidden bg-sky-400 text-white text-center items-center text-xl"}>
-                            <p className={"w-1/2 text-center"}>Modify</p>
-                            <p className={"w-1/2"}>Delete</p>
+                            <button className={"w-1/2 h-full hover:bg-blue-400"}>Modify</button>
+                            <button className={"w-1/2 h-full hover:bg-blue-400"}>Delete</button>
                         </div>
                         <div className={"flex"}>
                             <h2 className={"bg-red-400 text-white w-1/2 py-4 text-center text-xl border-r-4 border-blue-700"}><div>
