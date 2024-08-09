@@ -16,8 +16,11 @@ export const {
             if (session?.user) {
                 session.user.id = token.sub;
             }
-            console.log(token);
             return session;
+        },
+        authorized: async ({ auth }) => {
+            // Logged in users are authenticated, otherwise redirect to login page
+            return !!auth
         },
     },
     providers: [
@@ -34,3 +37,4 @@ export const {
         }),
     ],
 });
+

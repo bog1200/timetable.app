@@ -1,8 +1,8 @@
-import {PrismaClient} from "@prisma/client";
+
+import prisma  from "@/db";
 
 
 export async function DayView(props: {user: string, start: Date, end: Date}) {
-    const prisma = new PrismaClient();
     const events = await prisma.event.findMany({
         where: {
             uid: {equals: props.user},
@@ -18,6 +18,7 @@ export async function DayView(props: {user: string, start: Date, end: Date}) {
         <>
             <h1>Day: {props.start.getDate().toString().padStart(2,"0")}.{(props.start.getMonth()+1).toString().padStart(2,"0")}.{props.start.getFullYear()}</h1>
             <h2>User: {props.user}</h2>
+            {events.length === 0 && <h1>No events today</h1>}
             {events.map((event) => {
                 return (
                     <div key={event.id} className={"border border-red-600 w-full p-4"}>
