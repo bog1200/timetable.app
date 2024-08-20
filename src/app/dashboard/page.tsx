@@ -3,21 +3,13 @@ import { DateTime } from "luxon";
 
 import { DayView } from "@/app/components/dayView";
 import {Suspense, useState} from "react";
-import {redirect} from "next/navigation";
-import { useSession } from 'next-auth/react';
+
 
 
 export default  function HomePage() {
-    const session = useSession()// Get session data on the client-side
-    if (!session) {
-        redirect("/login");
-    }
-
     const [currentDay, setCurrentDay] = useState<DateTime>(DateTime.now());
-
     // Adjust start and end time based on currentDay
     const start = currentDay.startOf('day')
-
 
     return (
         <div className="flex flex-col items-center m-4 h-screen">
