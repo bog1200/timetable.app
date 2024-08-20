@@ -1,12 +1,24 @@
 import prisma  from "@/db";
+import {deleteEvent} from "@/app/actions/events";
 
 
 export async function DayView(props: {user: string, start: Date, end: Date}) {
     const events = await prisma.event.findMany({
         where: {
             uid: {equals: props.user},
-            startTime: {gte: props.start},
-            endTime: {lte: props.end}
+            OR: [
+                {
+                    startTime: { gte: props.start, lte: props.end }
+                },
+                {
+                    endTime: { gte: props.start, lte: props.end }
+                },
+                {
+                    startTime: { lte: props.start },
+                    endTime: { gte: props.end }
+                }
+            ]
+
         },
         orderBy: {
             startTime: 'asc'
@@ -25,18 +37,26 @@ export async function DayView(props: {user: string, start: Date, end: Date}) {
                         <div
                             className={"w-full h-0 group-hover:h-20 transition-all duration-300 group-hover:md:delay-1000 delay-150 flex overflow-hidden bg-sky-400 text-white text-center items-center text-xl"}>
                             <button className={"w-1/2 h-full hover:bg-blue-400"}>Modify</button>
-                            <button className={"w-1/2 h-full hover:bg-blue-400"}>Delete</button>
+                            <form action={deleteEvent}>
+                                <input type={"hidden"} name={"eventId"} value={event.id}/>
+                                <button type={"submit"} className={"w-1/2 h-full hover:bg-blue-400"}>Delete</button>
+                            </form>
+
                         </div>
                         <div className={"flex"}>
                             <h2 className={"bg-red-400 text-white w-1/2 py-4 text-center text-xl border-r-4 border-blue-700"}>
                                 <div>
                                     <h3 className={"text-sm"}>From:</h3>
+                                    {(event.startTime.getDay() != event.endTime.getDay() || event.startTime.getMonth() != event.endTime.getMonth() || event.startTime.getFullYear() != event.endTime.getFullYear() ) &&
+                                        <p>{event.startTime.getDate().toString().padStart(2, "0")}.{(event.startTime.getMonth() + 1).toString().padStart(2, "0")}.{event.startTime.getFullYear()} </p>}
                                     <p>{event.startTime.getHours()}:{event.startTime.getMinutes()}</p>
                                 </div>
                             </h2>
                             <h2 className={"bg-green-400 text-white w-1/2 py-4 text-center text-xl border-blue-700"}>
                                 <div>
                                     <h3 className={"text-sm"}>To:</h3>
+                                    {(event.startTime.getDay() != event.endTime.getDay() || event.startTime.getMonth() != event.endTime.getMonth() || event.startTime.getFullYear() != event.endTime.getFullYear() ) &&
+                                        <p>{event.endTime.getDate().toString().padStart(2, "0")}.{(event.endTime.getMonth() + 1).toString().padStart(2, "0")}.{event.endTime.getFullYear()} </p>}
                                     <p>{event.endTime.getHours()}:{event.endTime.getMinutes()}</p>
                                 </div>
                             </h2>

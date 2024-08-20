@@ -1,9 +1,12 @@
+"use client";
 import { DateTime } from "luxon";
 
 import { DayView } from "@/app/components/dayView";
 import {auth} from "@/auth";
 import {Suspense} from "react";
 import {redirect} from "next/navigation";
+import {WeekView} from "@/app/components/weekView";
+
 
 export default async function HomePage({params, searchParams}: {
     params: { slug: string };
@@ -11,7 +14,7 @@ export default async function HomePage({params, searchParams}: {
 }) {
     const session = await auth() // Get session data on the client-side
     if (!session) {
-        return redirect("/auth/signin");
+        return redirect("/api/auth/signin");
     }
     let currentDay =searchParams?.day ? DateTime.fromISO(searchParams.day as string) : DateTime.now();
 
@@ -40,7 +43,10 @@ export default async function HomePage({params, searchParams}: {
                 </a>
 
             </div>
-            <h1 className={"text-3xl md:hidden w-full text-center"}>{start.getDate().toString().padStart(2, "0")}.{(start.getMonth() + 1).toString().padStart(2, "0")}.{start.getFullYear()}</h1>
+            <h1 className={"text-3xl md:hidden w-full text-center"}>{`${start.getFullYear()}-${(start.getMonth() + 1).toString().padStart(2, "0")}-${start.getDate().toString().padStart(2, "0")}`} </h1>
+
+
+
             <div className={"w-full flex items-center flex-col"}>
                 <Suspense fallback={<p>Loading events...</p>}>
 

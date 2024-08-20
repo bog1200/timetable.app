@@ -1,36 +1,47 @@
+"use client";
+import {getSession} from "next-auth/react";
+import {auth} from "@/auth";
+import {createEvent} from "@/app/actions/events";
+
 export default function CreateEvent() {
     return (
-        <div className={"m-4 "}>
+        <div className={"m-4"}>
             <h1 className={"text-3xl capitalize"}>New event:</h1>
-            <form className={"space-y-2 flex flex-col mt-8"}>
-                <label htmlFor={"title"}>
-                    Title
-                </label>
-                <input type={"text"} id={"title"} name={"newTitle"}/>
-                <br/>
-                <label htmlFor={"desc"}>
-                    Description
-                </label>
+            <form className={"space-y-2 mt-8 m-4"}  action={async (formData) => {
+                await createEvent(formData);
+                window.alert("Event created");
+                window.location.reload();
+            }}>
+                <div >
+                    <label htmlFor={"title"} className={"block"}>
+                        Title
+                    </label>
+                    <input type={"text"} id={"title"} name={"newTitle"} className={"border-2 p-4 shadow-lg rounded-lg w-full"}/>
+                </div>
+                <div >
+                    <label htmlFor={"desc"}>
+                        Description
+                    </label>
 
-                <textarea id={"desc"} name={"newDesc"}></textarea>
-                <br/>
-                <label htmlFor={"date"} className={"w-full"}>
-                    Date
-                </label>
-                <input type={"date"} id={"date"} name={"newDate"}></input>
-                <br/>
-                <label htmlFor={"startTime"}>
-                    Start Time
-                </label>
-                <input type={"time"} id={"startTime"} name={"newStartTime"}></input>
-                <br/>
-                <label htmlFor={"endTime"}>
-                    End Time
-                </label>
-                <input type={"time"} id={"endTime"} name={"newEndTime"}></input>
-                <input type={"hidden"} name={"userId"}></input>
-                <br/>
-                <button type={"submit"} className={"p-4 bg-green-500 text-white rounded-lg"}>Add Event</button>
+                    <textarea id={"desc"} name={"newDesc"} className={"border-2 p-4 shadow-lg rounded-lg w-full"}></textarea>
+                </div>
+                <div>
+                    <label htmlFor={"startTime"}>
+                        Start Time
+                    </label>
+                    <input type={"datetime-local"} id={"startTime"} name={"newStartTime"}
+                           className={"border-2 p-4 shadow-lg rounded-lg w-full"}></input>
+                </div>
+                <div>
+                    <label htmlFor={"endTime"}>
+                        End Time
+                    </label>
+                    <input type={"datetime-local"} id={"endTime"} name={"newEndTime"} className={"border-2 p-4 shadow-lg rounded-lg w-full"}></input>
+                </div>
+                <div className={"flex justify-center py-8"}>
+
+                <button type={"submit"} className={"p-4 bg-green-500 text-white rounded-lg w-1/2"}>Add Event</button>
+                </div>
 
             </form>
         </div>
