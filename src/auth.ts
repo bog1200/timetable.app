@@ -1,6 +1,8 @@
 
 import NextAuth from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
+import Google from "@auth/core/providers/google";
+import Discord from "@auth/core/providers/discord";
 
 export const {
     handlers: { GET, POST },
@@ -24,6 +26,11 @@ export const {
         },
     },
     providers: [
+        Discord({
+            clientId: process.env.DISCORD_ID,
+            clientSecret: process.env.DISCORD_SECRET,
+        }),
+
         GitHubProvider({
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
@@ -35,6 +42,11 @@ export const {
                 },
             },
         }),
+         Google({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+        }),
+
     ],
 });
 
