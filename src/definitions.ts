@@ -1,8 +1,2 @@
-
-export type Activity =  {
-    user: string,
-    startTime: Date
-    endTime: Date
-    title: String
-    description: String
-}
+import {Event} from "@prisma/client";
+export type {Event};

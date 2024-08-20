@@ -3,6 +3,7 @@ import prisma from "@/db";
 import {auth} from "@/auth";
 import {DateTime} from "luxon";
 
+
 export async function createEvent(formData:any) {
     const session = await auth();
     const title = formData.get('newTitle');
