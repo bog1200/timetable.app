@@ -10,6 +10,7 @@ export default function CreateEvent() {
             <form className={"space-y-2 mt-8 m-4"}  action={async (formData) => {
                 //convert startTime to UTC
                 formData.set("newStartTime",DateTime.fromISO(formData.get('newStartTime') as string).toUTC().toString());
+                formData.set("newEndTime",DateTime.fromISO(formData.get('newEndTime') as string).toUTC().toString());
                 await createEvent(formData);
                 window.alert("Event created");
                 await scheduleNotification(formData.get('newTitle') as string, formData.get('newStartTime') as string);
