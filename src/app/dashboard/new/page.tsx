@@ -1,15 +1,18 @@
 "use client";
 import {createEvent} from "@/app/actions/events";
 import {scheduleNotification} from "@/app/actions/notifications";
+import {DateTime} from "luxon";
 
 export default function CreateEvent() {
     return (
         <div className={"m-4"}>
             <h1 className={"text-3xl capitalize"}>New event:</h1>
             <form className={"space-y-2 mt-8 m-4"}  action={async (formData) => {
+                //convert startTime to UTC
+                formData.set("newStartTime",DateTime.fromISO(formData.get('newStartTime') as string).toUTC().toString());
                 await createEvent(formData);
                 window.alert("Event created");
-                scheduleNotification(formData.get('newTitle') as string, formData.get('newStartTime') as string);
+                await scheduleNotification(formData.get('newTitle') as string, formData.get('newStartTime') as string);
                 window.location.reload();
             }}>
                 <div >

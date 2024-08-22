@@ -36,7 +36,7 @@ export function DayView(props: { start: DateTime }) {
                    //setLoading(true);
                });
        }
-         fetchEvents();
+         fetchEvents().then();
     }, [props.start]);
 
     return (
@@ -60,7 +60,7 @@ export function DayView(props: { start: DateTime }) {
                                 {(event.startTime.getDay() !== event.endTime.getDay() || event.startTime.getMonth() !== event.endTime.getMonth() || event.startTime.getFullYear() !== event.endTime.getFullYear()) && (
                                     <p>{event.startTime.getDate().toString().padStart(2, "0")}.{(event.startTime.getMonth() + 1).toString().padStart(2, "0")}.{event.startTime.getFullYear()}</p>
                                 )}
-                                <p>{event.startTime.getHours()}:{event.startTime.getMinutes()}</p>
+                                <p>{event.startTime.getHours().toString().padStart(2,"0")}:{event.startTime.getMinutes().toString().padStart(2,"0")}</p>
                             </div>
                         </h2>
                         <h2 className={"bg-green-400 text-white w-1/2 py-4 text-center text-xl border-blue-700"}>
@@ -69,7 +69,7 @@ export function DayView(props: { start: DateTime }) {
                                 {(event.startTime.getDay() !== event.endTime.getDay() || event.startTime.getMonth() !== event.endTime.getMonth() || event.startTime.getFullYear() !== event.endTime.getFullYear()) && (
                                     <p>{event.endTime.getDate().toString().padStart(2, "0")}.{(event.endTime.getMonth() + 1).toString().padStart(2, "0")}.{event.endTime.getFullYear()}</p>
                                 )}
-                                <p>{event.endTime.getHours()}:{event.endTime.getMinutes()}</p>
+                                <p>{event.endTime.getHours().toString().padStart(2, "0")}:{event.endTime.getMinutes().toString().padStart(2, "0")}</p>
                             </div>
                         </h2>
                     </div>
