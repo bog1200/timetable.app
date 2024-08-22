@@ -2,7 +2,7 @@
 import { DateTime } from "luxon";
 
 import { DayView } from "@/app/components/dayView";
-import {Suspense, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 
 
 
@@ -10,6 +10,24 @@ export default  function HomePage() {
     const [currentDay, setCurrentDay] = useState<DateTime>(DateTime.now());
     // Adjust start and end time based on currentDay
     const start = currentDay.startOf('day')
+    useEffect(() => {
+        // register service worker
+        if ('serviceWorker' in navigator) {
+            console.log("Loading Service Worker");
+                navigator.serviceWorker.register('/sw.js').then(registration => {
+                    console.log('SW registered: ', registration);
+                }).catch(registrationError => {
+                    console.log('SW registration failed: ', registrationError);
+                });
+        }
+    }, []);
+    useEffect(() => {
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission().then();
+        }
+    }, []);
+
+
 
     return (
         <div className="flex flex-col items-center m-4 h-screen">

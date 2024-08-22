@@ -4,7 +4,7 @@ import { Event } from "@/definitions";
 import {useEffect, useState} from "react";
 import {DateTime} from "luxon";
 
-export async function DayView(props: { start: DateTime }) {
+export function DayView(props: { start: DateTime }) {
     const [events, setEvents] = useState<Event[]>([]);
     //const defferedEvents = useDeferredValue(events );
     //const isStale = defferedEvents !== events;

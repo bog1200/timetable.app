@@ -1,7 +1,6 @@
 "use client";
-import {getSession} from "next-auth/react";
-import {auth} from "@/auth";
 import {createEvent} from "@/app/actions/events";
+import {scheduleNotification} from "@/app/actions/notifications";
 
 export default function CreateEvent() {
     return (
@@ -10,13 +9,14 @@ export default function CreateEvent() {
             <form className={"space-y-2 mt-8 m-4"}  action={async (formData) => {
                 await createEvent(formData);
                 window.alert("Event created");
+                scheduleNotification(formData.get('newTitle') as string, formData.get('newStartTime') as string);
                 window.location.reload();
             }}>
                 <div >
                     <label htmlFor={"title"} className={"block"}>
                         Title
                     </label>
-                    <input type={"text"} id={"title"} name={"newTitle"} className={"border-2 p-4 shadow-lg rounded-lg w-full"}/>
+                    <input type={"text"} id={"title"} name={"newTitle"} className={"border-2 p-4 shadow-lg rounded-lg w-full"} required={true}/>
                 </div>
                 <div >
                     <label htmlFor={"desc"}>
@@ -30,13 +30,13 @@ export default function CreateEvent() {
                         Start Time
                     </label>
                     <input type={"datetime-local"} id={"startTime"} name={"newStartTime"}
-                           className={"border-2 p-4 shadow-lg rounded-lg w-full"}></input>
+                           className={"border-2 p-4 shadow-lg rounded-lg w-full"} required={true}></input>
                 </div>
                 <div>
                     <label htmlFor={"endTime"}>
                         End Time
                     </label>
-                    <input type={"datetime-local"} id={"endTime"} name={"newEndTime"} className={"border-2 p-4 shadow-lg rounded-lg w-full"}></input>
+                    <input type={"datetime-local"} id={"endTime"} name={"newEndTime"} className={"border-2 p-4 shadow-lg rounded-lg w-full"} required={true}></input>
                 </div>
                 <div className={"flex justify-center py-8"}>
 
