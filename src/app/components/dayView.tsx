@@ -44,9 +44,9 @@ export function DayView(props: { start: DateTime }) {
             {!loading && events.map((event) => (
                 <div key={event.id} className={"border border-gray-600 w-[80%] m-4 shadow-lg group rounded-lg"}>
                     <div className={"flex bg-blue-500 border-blue-700 rounded-t-lg border-b-4"}>
-                        <h1 className={"text-white py-4 text-center text-xl  w-full transition-all duration-300 group-hover:md:delay-1000 delay-150"}>{event.title}</h1>
+                        <h1 className={"text-white py-4 text-center text-xl  w-full transition-all duration-300"}>{event.title}</h1>
                         <div
-                            className={"w-0 group-hover:w-fit h-20 group-hover:h-20 group-hover:border-l-4 border-blue-700 transition-all duration-300 group-hover:md:delay-1000 delay-150 inline-flex overflow-hidden text-white text-center items-center text-xl"}>
+                            className={"w-0 group-hover:w-16 h-20 group-hover:h-20 group-hover:border-l-4 border-blue-700 transition-all duration-300 inline-flex overflow-hidden text-white text-center items-center text-xl"}>
                             <a className={"h-full hover:bg-blue-400"}
                                href={`/dashboard/modify?id=${event.id}`}>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

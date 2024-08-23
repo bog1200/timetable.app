@@ -43,7 +43,7 @@ function checkEvents() {
 }
 
 checkEvents();
-const interval = setInterval(checkEvents, 1000 * 10);
+const interval = setInterval(checkEvents, 1000 * 30);
 
 self.addEventListener("unload", function() {
     console.log("Service worker unloading...");
