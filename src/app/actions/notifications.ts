@@ -6,3 +6,12 @@ export async function scheduleNotification(eventTitle: string, eventStartTime: s
         });
     }
 }
+export async function unregisterServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+}

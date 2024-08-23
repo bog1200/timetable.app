@@ -1,5 +1,4 @@
 "use client"
-import { deleteEvent } from "@/app/actions/events";
 import { Event } from "@/definitions";
 import {useEffect, useState} from "react";
 import {DateTime} from "luxon";
@@ -44,15 +43,21 @@ export function DayView(props: { start: DateTime }) {
             {loading ? <h1 className={"p-4 text-lg"}>Loading events...</h1> : events.length === 0 ? <h1 className={"p-4 text-lg"}>No events today</h1> : <h1 className={"p-4 text-lg"}>Events today:</h1>}
             {!loading && events.map((event) => (
                 <div key={event.id} className={"border border-gray-600 w-[80%] m-4 shadow-lg group rounded-lg"}>
-                    <h1 className={"bg-blue-500 text-white py-4 text-center text-xl border-b-4 border-blue-700 rounded-t-lg"}>{event.title}</h1>
-                    <div
-                        className={"w-full h-0 group-hover:h-20 transition-all duration-300 group-hover:md:delay-1000 delay-150 flex overflow-hidden bg-sky-400 text-white text-center items-center text-xl"}>
-                        <button className={"w-1/2 h-full hover:bg-blue-400"}>Modify</button>
-                        <form action={deleteEvent}>
-                            <input type={"hidden"} name={"eventId"} value={event.id}/>
-                            <button type={"submit"} className={"w-1/2 h-full hover:bg-blue-400"}>Delete</button>
-                        </form>
+                    <div className={"flex bg-blue-500 border-blue-700 rounded-t-lg border-b-4"}>
+                        <h1 className={"text-white py-4 text-center text-xl  w-full transition-all duration-300 group-hover:md:delay-1000 delay-150"}>{event.title}</h1>
+                        <div
+                            className={"w-0 group-hover:w-fit h-20 group-hover:h-20 group-hover:border-l-4 border-blue-700 transition-all duration-300 group-hover:md:delay-1000 delay-150 inline-flex overflow-hidden text-white text-center items-center text-xl"}>
+                            <a className={"h-full hover:bg-blue-400"}
+                               href={`/dashboard/modify?id=${event.id}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                     strokeWidth={1.5} stroke="currentColor" className="size-10 flex content-center">
+                                    <path strokeLinecap="round" strokeLinejoin="round"
+                                          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
+
                     <div className={"flex"}>
                         <h2 className={"bg-red-400 text-white w-1/2 py-4 text-center text-xl border-r-4 border-blue-700"}>
                             <div>

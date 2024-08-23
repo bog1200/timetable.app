@@ -6,7 +6,10 @@ export default async function DashboardLayout({ children }:
     return (
         <SessionProvider>
             <Navbar></Navbar>
-            {children}
+            <main className={"mt-28"}>
+                {children}
+            </main>
+
         </SessionProvider>
     );
     }
