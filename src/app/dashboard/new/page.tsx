@@ -11,6 +11,10 @@ export default function CreateEvent() {
                 //convert startTime to UTC
                 formData.set("newStartTime",DateTime.fromISO(formData.get('newStartTime') as string).toUTC().toString());
                 formData.set("newEndTime",DateTime.fromISO(formData.get('newEndTime') as string).toUTC().toString());
+                if (DateTime.fromISO(formData.get('newStartTime') as string) > DateTime.fromISO(formData.get('newEndTime') as string)) {
+                    window.alert("End time cannot be before start time");
+                    return;
+                }
                 await createEvent(formData);
                 window.alert("Event created");
                 await scheduleNotification(formData.get('newTitle') as string, formData.get('newStartTime') as string);
