@@ -78,9 +78,12 @@ export function DayView(props: { start: DateTime }) {
                             </div>
                         </h2>
                     </div>
-                    <h2 className={"py-4 text-lg text-center border-t-2 border-gray-600 "}>{event.description}</h2>
-                </div>
-            ))}
-        </>
-    );
-}
+                    {event.description ?
+                        <h2 className={"py-4 text-lg text-center border-t-2 border-gray-600 "}>{event.description}</h2> :
+                        <h2 className={"py-4 text-lg text-center border-t-2 text-opacity-40 text-gray-500 border-gray-600 "}> - </h2>
+                    }
+                        </div>
+                        ))}
+                </>
+            );
+            }
