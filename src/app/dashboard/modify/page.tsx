@@ -64,7 +64,7 @@ export default function ModifyEvent() {
                         <input type={"datetime-local"} id={"startTime"} name={"newStartTime"}
                                className={"border-2 p-4 shadow-lg rounded-lg w-full"}
                                value={DateTime.fromJSDate(event.startTime).toLocal().toFormat("yyyy-MM-dd'T'HH:mm")}
-                               required={true}></input>
+                               readOnly={true}></input>
                     </div>
                     <div>
                         <label htmlFor={"endTime"}>
@@ -73,7 +73,7 @@ export default function ModifyEvent() {
                         </label>
                         <input type={"datetime-local"} id={"endTime"} name={"newEndTime"}
                                value={DateTime.fromJSDate(event.endTime).toLocal().toFormat("yyyy-MM-dd'T'HH:mm")}
-                               className={"border-2 p-4 shadow-lg rounded-lg w-full"} required={true}></input>
+                               className={"border-2 p-4 shadow-lg rounded-lg w-full"} readOnly={true}></input>
                     </div>
                     <div className={"flex justify-center py-8"}>
                         <input type={"hidden"} name={"eventId"} value={event.id}/>
