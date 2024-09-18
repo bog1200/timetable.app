@@ -14,7 +14,7 @@
     "@vercel/postgres": "^0.9.0",
     "@vercel/speed-insights": "^1.0.12",
     "luxon": "^3.5.0",
-    "next": "14.2.5",
+    "next": "14.2.12",
     "next-auth": "^5.0.0-beta.20",
     "prisma": "^5.18.0",
     "react": "^18",
